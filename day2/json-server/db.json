@@ -1,16 +1,6 @@
 {
   "posts": [
     {
-      "id": 2,
-      "title": "save1",
-      "author": "choi"
-    },
-    {
-      "id": 3,
-      "title": "second",
-      "author": "kim"
-    },
-    {
       "id": 4,
       "title": "fofofofo",
       "author": "hong"
@@ -34,6 +24,11 @@
       "id": "9",
       "title": "ttss",
       "author": "ttss"
+    },
+    {
+      "id": "1",
+      "title": "2",
+      "author": "3"
     }
   ],
   "comments": [
