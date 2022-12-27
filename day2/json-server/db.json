@@ -1,0 +1,64 @@
+{
+  "posts": [
+    {
+      "id": 2,
+      "title": "save1",
+      "author": "choi"
+    },
+    {
+      "id": 3,
+      "title": "second",
+      "author": "kim"
+    },
+    {
+      "id": 4,
+      "title": "fofofofo",
+      "author": "hong"
+    },
+    {
+      "id": 5,
+      "title": "vavava",
+      "author": "park"
+    },
+    {
+      "id": 6,
+      "title": "save2",
+      "author": "lee"
+    },
+    {
+      "id": 7,
+      "title": "save3",
+      "author": "dll"
+    },
+    {
+      "id": "9",
+      "title": "ttss",
+      "author": "ttss"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment"
+    },
+    {
+      "id": "3",
+      "body": "ssome"
+    },
+    {
+      "id": 4,
+      "body": "sssome"
+    },
+    {
+      "id": 2,
+      "body": "ssomes"
+    },
+    {
+      "id": 5,
+      "body": "eefef"
+    }
+  ],
+  "profile": {
+    "name": "jung"
+  }
+}
