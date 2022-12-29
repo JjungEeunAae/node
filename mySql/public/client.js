@@ -39,7 +39,7 @@ function selectAll() {
 
 //!등록
 function insert() {
-    //수정 버튼을 클릭하면
+    //추가 버튼을 클릭하면
     addbtn.addEventListener("click", () => {
         let data = {
             name: username.value,
