@@ -1,0 +1,9 @@
+extends layout
+
+//- 뷰페이지 만드는 곳
+
+block content
+  h1= title
+  p Welcome to #{title}
+  form(action="/users/logout", method="post")
+    button(type="submit") 로그아웃
