@@ -1,27 +1,12 @@
-/** @format */
-
-//! 웹서버
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
-//var cookieParser = require("cookie-parser");
+var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
-//! 라우터를 실행
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-var customersRouter = require("./routes/customers");
-
-//? 2022/12/30
-var booksRouter = require("./routes/books");
-//브라우저의 접속 정보라던지 로그인 정보를 저장을 할 때,
-//session을 이용하며, 서버에 직접 저장할 수 있고 쿠키에 저장할 수 있음
-//session 실행
-const session = require("express-session");
-//session 저장위치
-const fileStore = require("session-file-store")(session);
-
-//! 서버를 생성하는 그 자체 =createServer()
+var boardRouter = require("./routes/board");
 var app = express();
 
 // view engine setup
@@ -31,26 +16,12 @@ app.set("view engine", "jade");
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-//app.use(cookieParser()); //버전으로 인해 사용을 안해도 됨
-app.use(
-  session({
-    secret: "secret key",
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      httpOnly: true,
-      //secure: true, //https
-      maxAge: 60000, //밀리초
-    },
-    store: new fileStore(),
-  })
-);
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/customers", customersRouter);
-app.use("/books", booksRouter);
+app.use("/board", boardRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
