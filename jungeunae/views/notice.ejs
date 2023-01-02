@@ -6,11 +6,11 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>전체게시글</title>
+        <title>Document</title>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
-        <link href="./stylesheets/border.css" rel="stylesheet" />
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link href="./stylesheets/border.css" rel="stylesheet" />
     </head>
     <body>
         <div class="container">
@@ -44,17 +44,6 @@
                                             <th scope="col">작성일</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <% for(let i = 0 ; i < list.length ; i++) { %>
-                                        <tr>
-                                            <th scope="row"><%=list[i].no%></th>
-                                            <td><%=list[i].userid%></td>
-                                            <td><%=list[i].title%></td>
-                                            <td><%=list[i].views%></td>
-                                            <td><%=list[i].ydata%></td>
-                                        </tr>
-                                        <% } %>
-                                    </tbody>
                                 </table>
                             </div>
                         </div>
