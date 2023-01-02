@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="./stylesheets/border.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <h1 style="color: rgb(19, 19, 143)">Home page</h1>
+        <div role="tabpanel">
+          <button type="submit">글쓰기</button>
+          <div class="col-sm-3">
+            <ul class="nav nav-pills brand-pills nav-stacked" role="tablist">
+              <li role="presentation" class="brand-nav active">
+                <a
+                  href="#tab1"
+                  aria-controls="tab1"
+                  role="tab"
+                  data-toggle="tab"
+                  >자유게시판</a
+                >
+              </li>
+              <li role="presentation" class="brand-nav">
+                <a
+                  href="#tab3"
+                  aria-controls="tab2"
+                  role="tab"
+                  data-toggle="tab"
+                  >공지사항</a
+                >
+              </li>
+              <li role="presentation" class="brand-nav">
+                <a
+                  href="#tab4"
+                  aria-controls="tab3"
+                  role="tab"
+                  data-toggle="tab"
+                  >소개</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-sm-9">
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane active" id="tab1">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">ID</th>
+                      <th scope="col">글 제목</th>
+                      <th scope="col">조회수</th>
+                      <th scope="col">작성일</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>0</td>
+                      <td>2023-01-01</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="tab2">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">제목</th>
+                      <th scope="col">ID</th>
+                      <th scope="col">조회수</th>
+                      <th scope="col">작성일</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>0</td>
+                      <td>2023-01-01</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="tab3">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">제목</th>
+                      <th scope="col">ID</th>
+                      <th scope="col">조회수</th>
+                      <th scope="col">작성일</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>0</td>
+                      <td>2023-01-01</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

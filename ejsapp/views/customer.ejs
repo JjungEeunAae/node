@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>게시판</h3>
+    <table>
+      <tr>
+        <td>번호</td>
+        <td>이름</td>
+        <td>이메일</td>
+        <td>전화번호</td>
+      </tr>
+      <% for(let i = 0 ; i < list.length ; i++) { %>
+      <tr>
+        <td><%=list[i].id%></td>
+        <td><%=list[i].name%></td>
+        <td><%=list[i].email%></td>
+        <td><%=list[i].phone%></td>
+      </tr>
+      <% } %>
+    </table>
+  </body>
+</html>

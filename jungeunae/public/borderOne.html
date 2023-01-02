@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>게시글 작성</title>
+    <link href="./stylesheets/borderOne.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <h2 style="padding: 0px 15px">게시글 작성</h2>
+      </div>
+      <div id="from">
+        <from>
+          <span id="category">작성유형</span>
+          <label
+            ><input
+              type="checkbox"
+              name="checkbox"
+              class="check"
+              onclick="checkOnlyOne(this)"
+              checked
+            />자유게시판</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              name="checkbox"
+              class="check"
+              onclick="checkOnlyOne(this)"
+            />가입인사</label
+          >
+        </from>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="widget-area no-padding blank">
+            <div class="status-upload">
+              <form>
+                <textarea
+                  placeholder="What are you doing right now?"
+                ></textarea>
+                <ul>
+                  <li>
+                    <a
+                      title=""
+                      data-toggle="tooltip"
+                      data-placement="bottom"
+                      data-original-title="Audio"
+                      ><i class="fa fa-music"></i
+                    ></a>
+                  </li>
+                  <li>
+                    <a
+                      title=""
+                      data-toggle="tooltip"
+                      data-placement="bottom"
+                      data-original-title="Video"
+                      ><i class="fa fa-video-camera"></i
+                    ></a>
+                  </li>
+                  <li>
+                    <a
+                      title=""
+                      data-toggle="tooltip"
+                      data-placement="bottom"
+                      data-original-title="Sound Record"
+                      ><i class="fa fa-microphone"></i
+                    ></a>
+                  </li>
+                  <li>
+                    <a
+                      title=""
+                      data-toggle="tooltip"
+                      data-placement="bottom"
+                      data-original-title="Picture"
+                      ><i class="fa fa-picture-o"></i
+                    ></a>
+                  </li>
+                </ul>
+                <button type="submit" class="btn btn-success green">
+                  <i class="fa fa-share"></i> 저장
+                </button>
+              </form>
+            </div>
+            <!-- Status Upload  -->
+          </div>
+          <!-- Widget Area -->
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    function checkOnlyOne(element) {
+      const checkboxes = document.getElementsByName("checkbox");
+      checkboxes.forEach((cb) => {
+        cb.checked = false;
+      });
+      element.checked = true;
+    }
+  </script>
+</html>

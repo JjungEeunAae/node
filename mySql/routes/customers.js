@@ -1,5 +1,3 @@
-/** @format */
-
 //! 웹서버에서 동작하고자하는 컨트롤러(router)를 실행
 //! 실행 후 client.js로 빠르게 respon(응답)
 
