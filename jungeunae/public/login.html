@@ -1,55 +1,41 @@
+<!-- @format -->
+
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>miniproject login</title>
-    <link
-      href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      rel="stylesheet"
-      id="bootstrap-css"
-    />
-    <link href="stylesheets/login.css" rel="stylesheet" />
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!------ Include the above in your HEAD tag ---------->
-  </head>
-  <body>
-    <div class="wrapper fadeInDown">
-      <div id="formContent">
-        <!-- Tabs Titles -->
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>miniproject login</title>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
+        <link href="stylesheets/login.css" rel="stylesheet" />
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!------ Include the above in your HEAD tag ---------->
+    </head>
+    <body>
+        <div class="wrapper fadeInDown">
+            <div id="formContent">
+                <!-- Tabs Titles -->
 
-        <!-- Icon -->
-        <div class="fadeIn first">
-          <img src="/images/wellcome.webp" id="icon" alt="User Icon" />
+                <!-- Icon -->
+                <div class="fadeIn first">
+                    <img src="/images/wellcome.webp" id="icon" alt="User Icon" />
+                </div>
+
+                <!-- Login Form -->
+                <form action="/users/login" method="post">
+                    <input type="text" id="login" class="fadeIn second" name="login" placeholder="아이디 입력" />
+                    <input type="password" id="password" class="fadeIn third" name="login" placeholder="패스워드 입력" />
+                    <input type="button" class="fadeIn fourth" value="로그인" />
+                </form>
+                <!-- Remind Passowrd -->
+                <div id="formFooter">
+                    <a class="underlineHover" href="#">비회원이신가요?</a>
+                </div>
+            </div>
         </div>
 
-        <!-- Login Form -->
-        <form action="/users/login" method="post">
-          <input
-            type="text"
-            id="login"
-            class="fadeIn second"
-            name="login"
-            placeholder="아이디 입력"
-          />
-          <input
-            type="password"
-            id="password"
-            class="fadeIn third"
-            name="login"
-            placeholder="패스워드 입력"
-          />
-          <input type="submit" class="fadeIn fourth" value="로그인" />
-        </form>
-        <!-- Remind Passowrd -->
-        <div id="formFooter">
-          <a class="underlineHover" href="#">비회원이신가요?</a>
-        </div>
-      </div>
-    </div>
-
-    <script></script>
-  </body>
+        <script></script>
+    </body>
 </html>

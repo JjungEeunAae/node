@@ -40,6 +40,7 @@
           <p class="lead">
             <% for(let i = 0 ; i < list.length ; i++) { %>
             <p class="lead"><%=list[i].title%></p>
+            <p class="lead"><%=list[i].ydata%></p>
             <i class="fa fa-user"> by <a href=""><%=list[i].userid%></a></i>
           </p>
           <hr />
@@ -48,20 +49,14 @@
           <hr />
           <% } %>
           <div class="well">
-            <h4><i class="fa fa-paper-plane-o"></i> 전체 댓글</h4>
+            <h4><i class="fa fa-comment"></i> 댓글</h4>
             <form role="form">
               <div class="form-group">
-                <textarea class="form-control" rows="3"></textarea>
+                댓글을 추가할 수 있는 권한이 없습니다.
               </div>
-              <button 
-                class="btn btn-primary saveBtn">
-                <a class="aTag">
-                  저장
-                </a>
-              </button>
               <button
                 class="btn btn-primary backBtn">
-                <a href="#" class="aTag" onclick="history.back()">
+                <a href="#" class="aTag" onclick="location.href='/notice'">
                   뒤로가기
                 </a>
               </button>

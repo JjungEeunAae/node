@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>단건조회</title>
+    <title>boder단건조회</title>
     <link
       href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
       rel="stylesheet"
@@ -48,20 +48,37 @@
           <hr />
           <% } %>
           <div class="well">
-            <h4><i class="fa fa-paper-plane-o"></i> 전체 댓글</h4>
+            <h4><i class="fa fa-comment"></i> 전체 댓글</h4>
             <form role="form">
               <div class="form-group">
-                <textarea class="form-control" rows="3"></textarea>
+                <input class="form-control" id="bc_id" type="text" placeholder="ID">
+                <textarea class="form-control" id="bc_content" rows="3"></textarea>
               </div>
-              <button 
-                class="btn btn-primary saveBtn">
+              <div>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>ID</th>
+                      <th>댓글내용</th>
+                      <th>작성시간</th>
+                      <th>수정버튼</th>
+                      <th>삭제버튼</th>
+                    </tr>
+                  </thead>
+                  <tbody id="divcomment">
+                  </tbody>
+                </table>
+              </div>
+              <button type="button"
+                class="btn btn-primary" id="saveBtn">
                 <a class="aTag">
-                  저장
+                  댓글등록
                 </a>
               </button>
               <button
-                class="btn btn-primary backBtn ajax">
-                <a href="#" class="aTag" onclick="history.back()">
+                class="btn btn-primary backBtn">
+                <a href="#" class="aTag" onclick="location.href='/border'">
                   뒤로가기
                 </a>
               </button>
@@ -72,11 +89,60 @@
       </div>
     </div>
     <script>
-      //댓글 Ajax 진행하기
-      /*
-      mysql -> public -> client.js 참고하기
-      */
-      function insertcomment(){}
+      // const bo_id = `<%=bo_id%>`;
+      const url = `/border/comment`;
+      commentAll();
+      commentInsert();
+
+      // 댓글 전체조회
+      function commentAll(){
+        fetch(url)
+        .then((res)=>res.json())
+        .then((res)=>{
+          for(let i = 0 ; i < res.length ; i++){
+            const str = `
+              <tr>
+                <td><input type="checkbox" /></td>
+                <td>${res[i].bc_id}</td>
+                <td>${res[i].bc_content}</td>
+                <td>${res[i].bc_date}</td>
+                <td>
+                  <button id="amendbtn">수정</button>
+                </td>
+                <td>
+                  <button id="delbtn">삭제</button>
+                </td>
+              </tr>`;
+            divcomment.innerHTML += str;
+          }
+        });
+      }
+
+      //등록
+      function commentInsert(){
+        saveBtn.addEventListener("click",()=>{
+          let data = {
+            bc_id : bc_id.value,
+            bc_content : bc_content.value,
+          };
+          fetch(url, {
+            method : "POST",
+            headers : {
+              "content-type" : "application/json"
+            },
+            body : JSON.stringify(data),
+          })
+            .then((res) => res.json())
+            .then((res) => {
+              alert("댓글이 등록되었습니다");
+              commentAll();
+            });
+        });
+      }
+
+      //수정
+
+      //삭제
     </script>
   </body>
 </html>
