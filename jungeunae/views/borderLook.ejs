@@ -14,15 +14,20 @@
       href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
       rel="stylesheet"
     />
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet" />
-
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <style>
       .container {
         width: 100%;
         margin: 0 auto;
+      }
+      .aTag{
+        color: white;
+        text-decoration-line: none;
+      }
+      .aTag:hover{
+        color: white;
+        text-decoration-line: none;
       }
     </style>
   </head>
@@ -31,35 +36,43 @@
       <div class="row">
         <div class="col-lg-8">
           <!-- the actual blog post: title/author/date/content -->
-          <h1><a href="">제목</a></h1>
+          <h1><a href=""></a></h1>
           <p class="lead">
-            <i class="fa fa-user"> by <a href="">아이디</a></i>
+            <% for(let i = 0 ; i < list.length ; i++) { %>
+            <p class="lead"><%=list[i].title%></p>
+            <i class="fa fa-user"> by <a href=""><%=list[i].userid%></a></i>
           </p>
           <hr />
-          <p class="lead">
-            Welcome to Bootstrap Blog Template! This is a blog template example,
-            built with Bootstrap. Contains "tools" that would be needed in a
-            post.
-          </p>
-          <p>
-            Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum
-            dolor Lorem ipsum dolor Lorem ipsum dolor.
-          </p>
           <br />
+          <p><%=list[i].content%></p>
           <hr />
+          <% } %>
           <div class="well">
             <h4><i class="fa fa-paper-plane-o"></i> 전체 댓글</h4>
             <form role="form">
               <div class="form-group">
                 <textarea class="form-control" rows="3"></textarea>
               </div>
-              <button type="submit" class="btn btn-primary">
-                <i class="fa fa-reply"></i> 저장
+              <button 
+                class="btn btn-primary saveBtn">
+                <a class="aTag">
+                  저장
+                </a>
+              </button>
+              <button
+                class="btn btn-primary backBtn ajax">
+                <a href="#" class="aTag" onclick="history.back()">
+                  뒤로가기
+                </a>
+              </button>
               </button>
             </form>
           </div>
         </div>
       </div>
     </div>
+    <script>
+      function insertcomment(){}
+    </script>
   </body>
 </html>

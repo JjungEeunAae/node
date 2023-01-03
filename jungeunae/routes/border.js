@@ -8,40 +8,57 @@ var router = express.Router();
 // ! Prefix = /border
 
 sql = {
-    select: "select * from freeboard", //조회
-    insert: "insert into freeboard set ?", //등록
-    update: "update freeboard set ? where no = ?", //수정
-    delete: "delete from freeboard where no = ?", //삭제
+  select: "select * from freeboard", //조회
+  selectOne: "select * from freeboard where no = ?", //단건조회
+  insert: "insert into freeboard set ?", //등록
+  view: "UPDATE freeboard SET views = views + 1 WHERE no = ?", //조회수증가
+  update: "update freeboard set ? where no = ?", //수정
+  delete: "delete from freeboard where no = ?", //삭제
 };
 
-//전체조회
+//!조회수
+
+//!전체조회
 router.get("/", (req, res) => {
-    pool.query(sql.select, (err, result) => {
-        if (err) {
-            console.log(err);
-        }
-        console.log(`Result => ${JSON.stringify(result)}`);
-        res.render("border", { list: result });
-    });
+  pool.query(sql.select, (err, result) => {
+    if (err) {
+      console.log(err);
+    }
+    console.log(`Result => ${JSON.stringify(result)}`);
+    res.render("border", { list: result });
+  });
 });
 
 // ! 글 작성 페이지 이동 (/border라는 url이 생략이 되어 있음)
 router.get("/writePage", (req, res) => {
-    pool.query(sql.select, (err, result) => {
-        if (err) {
-            console.log(err);
-        }
-        console.log(`Result => ${JSON.stringify(result)}`);
-        res.render("borderOne", { list: result });
-    });
+  pool.query(sql.select, (err, result) => {
+    if (err) {
+      console.log(err);
+    }
+    console.log(`Result => ${JSON.stringify(result)}`);
+    res.render("borderOne", { list: result });
+  });
 });
 
-router.post("/", (req, res) => {
-    pool.query(sql.insert, req.body, (err, result) => {
-        if (err) {
-            console.log(err);
-        }
-        res.send(result);
-    });
+// ! 글 작성 후 저장
+router.post("/writePage", (req, res) => {
+  pool.query(sql.insert, req.body, (err, result) => {
+    if (err) {
+      console.log(err);
+    }
+    res.send(result);
+  });
 });
+
+// ! 글 클릭하면 단건조회 페이지 이동
+router.get("/borderLook/:no", (req, res) => {
+  const no = req.params.no;
+  pool.query(sql.selectOne, no, (err, result) => {
+    if (err) {
+      console.log(err);
+    }
+    res.render("borderLook", { list: result });
+  });
+});
+
 module.exports = router;

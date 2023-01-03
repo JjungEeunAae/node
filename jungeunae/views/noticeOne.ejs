@@ -12,7 +12,7 @@
   <body>
     <div class="container">
       <div class="row">
-        <h2 id="title1">boder 게시글 작성</h2>
+        <h2 id="title1">notice 게시글 작성</h2>
       </div>
       <div class="row">
         <div class="widget-area no-padding blank">
@@ -106,7 +106,7 @@
           title: title.value,
           content: content.value,
         };
-        fetch("/border/writePage", {
+        fetch("/notice/writePage", {
           method: "post",
           headers: {
             "content-type": "application/json",
@@ -116,7 +116,7 @@
           .then((res) => res.json())
           .then(() => {
             alert("게시글 등록 완료");
-            location.href = "/border";
+            location.href = "/notice";
           });
       });
     }

@@ -40,7 +40,7 @@ app.use(
   session({
     secret: "secret key",
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: true, //빈값이여도 쿠키가 생셩된다는 부분
     cookie: {
       httpOnly: true,
       //secure: true,
