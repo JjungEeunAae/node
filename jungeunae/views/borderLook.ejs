@@ -47,6 +47,16 @@
           <p><%=list[i].content%></p>
           <hr />
           <% } %>
+          <div style="margin:10px;">
+            <button
+              type="button"
+              id="updateBtn"
+              name="updateBtn"
+              class="btn btn-primary backBtn"
+              onclick="location.href='/border/borderPut/<%=list[0].no%>'">
+              게시글 수정
+            </button>
+          </div>
           <div class="well">
             <h4><i class="fa fa-comment"></i> 전체 댓글</h4>
             <form role="form">
@@ -59,11 +69,11 @@
                   <thead>
                     <tr>
                       <th>#</th>
+                      <th>번호</th>
                       <th>ID</th>
                       <th>댓글내용</th>
                       <th>작성시간</th>
-                      <th>수정버튼</th>
-                      <th>삭제버튼</th>
+                      <th>-</th>
                     </tr>
                   </thead>
                   <tbody id="divcomment">
@@ -93,24 +103,24 @@
       const url = `/border/comment`;
       commentAll();
       commentInsert();
+      commentDelete();
 
       // 댓글 전체조회
       function commentAll(){
         fetch(url)
         .then((res)=>res.json())
         .then((res)=>{
+          divcomment.innerHTML = '';
           for(let i = 0 ; i < res.length ; i++){
             const str = `
-              <tr>
+              <tr data-no="${res[i].no}">
                 <td><input type="checkbox" /></td>
+                <td>${res[i].no}</td>
                 <td>${res[i].bc_id}</td>
                 <td>${res[i].bc_content}</td>
                 <td>${res[i].bc_date}</td>
                 <td>
-                  <button id="amendbtn">수정</button>
-                </td>
-                <td>
-                  <button id="delbtn">삭제</button>
+                  <button type="button" id="delbtn">삭제</button>
                 </td>
               </tr>`;
             divcomment.innerHTML += str;
@@ -118,7 +128,7 @@
         });
       }
 
-      //등록
+      // 댓글 등록
       function commentInsert(){
         saveBtn.addEventListener("click",()=>{
           let data = {
@@ -135,14 +145,25 @@
             .then((res) => res.json())
             .then((res) => {
               alert("댓글이 등록되었습니다");
-              commentAll();
+              commentAll()
+            })
+            .catch(()=>{
+              alert("댓글 등록 실패!");
             });
         });
       }
-
-      //수정
-
-      //삭제
+      // 댓글 삭제
+      function commentDelete(){
+        divcomment.addEventListener("click",(event)=>{
+          if(event.target.id == "delbtn"){
+            //확인, 취소 여부를 사용자에게 알림창으로 물어보는 기능(confirm)
+            if(confirm('삭제할까요?')){
+            let no = event.target.closest("tr").getAttribute("data-no");
+            fetch(`${url}/${no}`, {method : "delete"}).then(() => commentAll());
+            }
+          }
+        })
+      }
     </script>
   </body>
 </html>
