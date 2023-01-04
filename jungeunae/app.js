@@ -34,7 +34,7 @@ app.use(
         saveUninitialized: true, //빈값이여도 쿠키가 생성된다는 부분
         cookie: {
             httpOnly: true,
-            maxAge: 60000, //밀리초
+            maxAge: 30 * 24 * 60 * 60 * 1000, //밀리초
         },
         store: new fileStore(),
     })

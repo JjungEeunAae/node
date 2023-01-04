@@ -1,65 +1,46 @@
+<!-- @format -->
+
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>miniproject login</title>
-    <link
-      href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      rel="stylesheet"
-      id="bootstrap-css"
-    />
-    <link href="stylesheets/login.css" rel="stylesheet" />
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!------ Include the above in your HEAD tag ---------->
-  </head>
-  <body>
-    <div class="wrapper fadeInDown">
-      <div id="formContent">
-        <!-- Tabs Titles -->
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>miniproject login</title>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
+        <link href="stylesheets/login.css" rel="stylesheet" />
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!------ Include the above in your HEAD tag ---------->
+    </head>
+    <body>
+        <div class="wrapper fadeInDown">
+            <div id="formContent">
+                <!-- Tabs Titles -->
 
-        <!-- Icon -->
-        <div class="fadeIn first">
-          <img src="/images/wellcome.webp" id="icon" alt="User Icon" />
-        </div>
+                <!-- Icon -->
+                <div class="fadeIn first">
+                    <img src="/images/wellcome.webp" id="icon" alt="User Icon" />
+                </div>
 
-        <!-- 로그인 form -->
-        <form action="/users/login" method="post">
-          <input
-            type="text"
-            id="login"
-            class="fadeIn second"
-            name="userid"
-            placeholder="아이디 입력"
-          />
-          <input
-            type="password"
-            id="password"
-            class="fadeIn third"
-            name="userpw"
-            placeholder="패스워드 입력"
-          />
-          <!-- 전체게시판 페이지 이동 /submit : form의 기능을 전송
+                <!-- 로그인 form -->
+                <form action="/users/login" method="post">
+                    <input type="text" id="login" class="fadeIn second" name="userid" placeholder="아이디 입력" />
+                    <input type="password" id="password" class="fadeIn third" name="userpw" placeholder="패스워드 입력" />
+                    <!-- 전체게시판 페이지 이동 /submit : form의 기능을 전송
                button은 javacsript를 이용한 기능구현 할 때 사용  -->
-          <input
-            type="submit"
-            id="loginBtn"
-            class="fadeIn fourth"
-            value="로그인"
-          />
-        </form>
-        <div id="formFooter">
-          <a class="underlineHover" href="#">비회원이신가요?</a>
+                    <input type="submit" id="loginBtn" class="fadeIn fourth" value="로그인" />
+                </form>
+                <div id="formFooter">
+                    <a class="underlineHover">비회원이신가요?</a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <script>
-      formFooter.addEventListener("click", () => {
-        alert("비회원은 읽기만 가능합니다");
-        location.href = `/border`;
-      });
-    </script>
-  </body>
+        <script>
+            formFooter.addEventListener("click", () => {
+                alert("비회원은 읽기만 가능합니다");
+                location.href = `/border`;
+            });
+        </script>
+    </body>
 </html>

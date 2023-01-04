@@ -17,9 +17,14 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <style>
+      body{
+        background-image: url(/images/배경화면2.jpg);
+      }
       .container {
-        width: 100%;
+        width: 90%;
         margin: 0 auto;
+        height: 1000px;
+        background-color: rgba(240, 241, 247, 0.911);
       }
       .aTag{
         color: white;
@@ -29,23 +34,26 @@
         color: white;
         text-decoration-line: none;
       }
+      #C_T{
+        height: 400px;
+      }
     </style>
   </head>
   <body>
     <div class="container">
-      <div class="row">
-        <div class="col-lg-8">
-          <!-- the actual blog post: title/author/date/content -->
-          <h1><a href=""></a></h1>
-          <p class="lead">
-            <% for(let i = 0 ; i < list.length ; i++) { %>
-            <p class="lead"><%=list[i].title%></p>
-            <p class="lead"><%=list[i].ydata%></p>
-            <i class="fa fa-user"> by <a href=""><%=list[i].userid%></a></i>
-          </p>
-          <hr />
+      <div 
+      <h1><a href=""></a></h1>
+      <p class="lead">
+        <% for(let i = 0 ; i < list.length ; i++) { %>
+          <p class="lead"><%=list[i].title%></p>
+          <p class="lead" style="font-size: 15px;"><%=list[i].ydata%></p>
+          <i class="fa fa-user"> by <a href=""><%=list[i].userid%></a></i>
+        </p>
+        <hr />
+        <div id="C_T">
           <br />
           <p><%=list[i].content%></p>
+        </div>
           <hr />
           <% } %>
           <div class="well">
@@ -63,7 +71,6 @@
               </button>
             </form>
           </div>
-        </div>
       </div>
     </div>
     <script>
