@@ -41,7 +41,7 @@
   </head>
   <body>
     <div class="container">
-      <div 
+      <div>
       <h1><a href=""></a></h1>
       <p class="lead">
         <% for(let i = 0 ; i < list.length ; i++) { %>
@@ -54,7 +54,6 @@
           <br />
           <p><%=list[i].content%></p>
         </div>
-          <hr />
           <% } %>
           <div class="well">
             <h4><i class="fa fa-comment"></i> 댓글</h4>
@@ -74,6 +73,17 @@
       </div>
     </div>
     <script>
+      const url = `/notice/noticeLook`;
+      const no = `<%=list[0].no%>`;
+      console.log(no);
+      viewsUpdate();
+
+      //조회수 증가
+      function viewsUpdate(){
+        fetch(`${url}/${no}`,
+              {method : "POST"})
+          .then((res)=>res.json())
+      }
     </script>
   </body>
 </html>

@@ -18,7 +18,8 @@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <style>
       body{
-        background-image: url(/images/배경화면2.jpg);
+        background-image: url(/images/게시판배경화면.jpg);
+        background-size: cover;
       }
       .container {
         width: 90%;
@@ -55,9 +56,11 @@
             <br />
             <p><%=list[i].content%></p>
           </div>
-            <hr />
-            <% } %>
+          <% } %>
+          <p>조회수<span id="views"></span></p>
             <div style="margin:10px;">
+              <% if(islogin) { %>
+                <% if(userid == list[0].userid) {%>
             <button
               type="button"
               id="updateBtn"
@@ -66,6 +69,8 @@
               onclick="location.href='/border/borderPut/<%=list[0].no%>'">
               게시글 수정
             </button>
+                <%}%>
+              <%}%>
           </div>
           <div class="well">
             <h4><i class="fa fa-comment"></i> 전체 댓글</h4>
@@ -85,7 +90,7 @@
                       <th>ID</th>
                       <th>댓글내용</th>
                       <th>작성시간</th>
-                      <th>-</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody id="divcomment">
@@ -110,19 +115,33 @@
       </div>
     </div>
     <script>
-      // const bo_id = `<%=bo_id%>`;
+      const bo_id = `<%=bo_id%>`;
       const url = `/border/comment`;
+      const userid = "<%=userid%>"
       commentAll();
       commentInsert();
       commentDelete();
+      viewsUpdate();
 
+      //조회수 증가
+      function viewsUpdate(){
+        fetch(`/border/borderLook/${bo_id}`,
+              {method : "POST"})
+          .then((res) => res.json())
+      }
+      
       // 댓글 전체조회
       function commentAll(){
-        fetch(url)
+        fetch(`${url}/${bo_id}`)
         .then((res)=>res.json())
         .then((res)=>{
           divcomment.innerHTML = '';
+          //게스트일땐 댓글 삭제 버튼이 안보임
           for(let i = 0 ; i < res.length ; i++){
+            let del = '';
+             if(userid == res[i].bc_id) {
+                  del = `<button type="button" id="delbtn">삭제</button>`
+             }
             const str = `
               <tr data-no="${res[i].no}">
                 <td><input type="checkbox" /></td>
@@ -131,7 +150,7 @@
                 <td>${res[i].bc_content}</td>
                 <td>${res[i].bc_date}</td>
                 <td>
-                  <button type="button" id="delbtn">삭제</button>
+                  ${del}
                 </td>
               </tr>`;
             divcomment.innerHTML += str;
@@ -143,6 +162,7 @@
       function commentInsert(){
         saveBtn.addEventListener("click",()=>{
           let data = {
+            bo_id,
             bc_id : bc_id.value,
             bc_content : bc_content.value,
           };
@@ -156,24 +176,31 @@
             .then((res) => res.json())
             .then((res) => {
               alert("댓글이 등록되었습니다");
-              commentAll()
+              commentAll();
+              inputDel();
             })
             .catch(()=>{
               alert("댓글 등록 실패!");
             });
         });
       }
+
       // 댓글 삭제
       function commentDelete(){
         divcomment.addEventListener("click",(event)=>{
           if(event.target.id == "delbtn"){
             //확인, 취소 여부를 사용자에게 알림창으로 물어보는 기능(confirm)
-            if(confirm('삭제할까요?')){
-            let no = event.target.closest("tr").getAttribute("data-no");
-            fetch(`${url}/${no}`, {method : "delete"}).then(() => commentAll());
-            }
-          }
-        })
+            if(confirm('댓글을 삭제하시겠습니까?')){
+              let no = event.target.closest("tr").getAttribute("data-no");
+              fetch(`${url}/${no}`, {method : "delete"})
+              .then(() => commentAll());
+            };
+          };
+        });
+      }
+
+      function inputDel(){
+        bc_content.value='';
       }
     </script>
   </body>

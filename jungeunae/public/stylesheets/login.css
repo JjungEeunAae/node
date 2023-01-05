@@ -9,7 +9,7 @@ body {
   height: 100vh; */
   height: 100vh;
   width: 100vw;
-  background-image: url(/images/배경화면.jpg);
+  background-image: url(/images/로그인배경화면.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }
