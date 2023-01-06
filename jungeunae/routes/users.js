@@ -81,8 +81,10 @@ router.post("/login", (req, res) => {
       console.log(req.session);
       req.session.islogin = true; //session에 로그인여부 값을 넣어준다
       req.session.userid = userid; //session에 아이디 값을 넣어준다
-      res.write("<script>alert('Wellcome!')</script>");
-      res.write('<script>window.location="../border"</script>');
+      req.session.save(() => {
+        res.write("<script>alert('Wellcome!')</script>");
+        res.write('<script>window.location="../border"</script>');
+      });
     }
   });
 });
