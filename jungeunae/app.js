@@ -29,12 +29,14 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(
   session({
-    secret: "secret key",
-    resave: false,
+    secret: "secret key", //암호화하는 데 쓰일 키
+    resave: false, //세션을 언제나 저장할지 설정함
     saveUninitialized: true, //빈값이여도 쿠키가 생성된다는 부분
     cookie: {
+      //세션 쿠키 설정(세션 관리 시 클라이언트에 보내는 쿠키)
       httpOnly: true,
-      maxAge: 30 * 24 * 60 * 60 * 1000, //밀리초
+      //쿠키 유지시간
+      maxAge: 30 * 24 * 60 * 60 * 1000,
     },
     store: new fileStore(),
   })

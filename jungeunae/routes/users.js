@@ -1,3 +1,5 @@
+/** @format */
+
 //const cookieParser = require("cookie-parser");
 var express = require("express");
 const pool = require("../mysql/pool");
@@ -37,7 +39,7 @@ router.get("/", (req, res) => {
 //   });
 // });
 
-//! 회원가입 EJS
+//! sign EJS
 router.get("/sign", (req, res) => {
   pool.query(loginsql.select, function (err, results, fields) {
     console.log(results);
@@ -45,24 +47,32 @@ router.get("/sign", (req, res) => {
   });
 });
 
+//! 회원가입 시 회원정보를 등록하는 부분
 router.post("/sign", (req, res) => {
   pool.query(loginsql.insert, req.body, function (err, results, fields) {
     console.log(results);
+    req.session.destroy();
     res.send(results);
-    //res.redirect("/login.html");
   });
 });
 
-//! 로그인 EJS
+//! login EJS
+router.get("/login", (req, res) => {
+  pool.query(loginsql.select, (err, results, fields) => {
+    res.render("login");
+  });
+});
 
 //!단건조회 / 로그인 후 전체게시판으로 이동
 router.post("/login", (req, res) => {
   const userid = req.body.userid;
   const userpw = req.body.userpw;
   pool.query(loginsql.selectOne, userid, (err, result) => {
+    console.log(result);
     if (result.length == 0) {
       console.log("loing failure!!");
-      res.redirect("/login.html");
+      res.write("<script>alert('Not a Member!')</script>");
+      res.write('<script>window.location="../users/login"</script>');
       return;
     }
     //일치한 정보가 있으면 다음 페이지로 넘어가고
@@ -71,17 +81,15 @@ router.post("/login", (req, res) => {
       console.log(req.session);
       req.session.islogin = true; //session에 로그인여부 값을 넣어준다
       req.session.userid = userid; //session에 아이디 값을 넣어준다
-      //redirect 메서드는 파라미터에 해당되는 URL로 이동시켜준다
-      setTimeout(() => {
-        res.redirect("/border");
-      }, 1000);
+      res.write("<script>alert('Wellcome!')</script>");
+      res.write('<script>window.location="../border"</script>');
     }
   });
 });
 
 router.get("/logout", (req, res) => {
   req.session.destroy();
-  res.redirect("/login.html");
+  res.redirect("/users/login");
 });
 
 module.exports = router;
