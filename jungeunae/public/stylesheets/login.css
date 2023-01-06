@@ -85,7 +85,7 @@ input[type="reset"] {
   background-color: #56baed;
   border: none;
   color: white;
-  padding: 15px 80px;
+  padding: 15px 70px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -95,7 +95,7 @@ input[type="reset"] {
   box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
-  margin: 5px 20px 40px 20px;
+  margin: 50px 5px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
@@ -267,13 +267,26 @@ input[type="text"]:placeholder {
   animation-delay: 0.8s;
 }
 
+/* 버튼 */
 .fadeIn.fourth {
   -webkit-animation-delay: 1s;
   -moz-animation-delay: 1s;
   animation-delay: 1s;
 }
+.find-btn {
+  text-align: center;
+}
+.find-btn1 {
+  display: inline-block;
+}
 
 /* Simple CSS3 Fade-in Animation */
+.underlineHover {
+  font-size: 14px;
+  font-weight: bold;
+  text-shadow: 2px 2px 2px rgb(187, 246, 250);
+}
+
 .underlineHover:after {
   display: block;
   left: 0;
@@ -286,7 +299,8 @@ input[type="text"]:placeholder {
 }
 
 .underlineHover:hover {
-  color: #0d0d0d;
+  color: #56baed;
+  cursor: pointer;
 }
 
 .underlineHover:hover:after {

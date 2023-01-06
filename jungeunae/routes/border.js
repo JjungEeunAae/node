@@ -91,7 +91,7 @@ router.put("/borderPut/:no", (req, res) => {
 // ! 글 클릭하면 단건조회 페이지 이동
 router.get("/borderLook/:no", (req, res) => {
   var one =
-    "select userid, title, content, DATE_FORMAT(ydata,'%Y-%m-%d') ydata from freeboard where no = ?";
+    "select no, userid, title, content, DATE_FORMAT(ydata,'%Y-%m-%d') ydata from freeboard where no = ?";
   const no = req.params.no;
   pool.query(one, no, (err, result) => {
     if (err) {
