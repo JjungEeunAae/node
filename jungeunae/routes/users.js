@@ -51,7 +51,7 @@ router.get("/sign", (req, res) => {
 router.post("/sign", (req, res) => {
   pool.query(loginsql.insert, req.body, function (err, results, fields) {
     console.log(results);
-    req.session.destroy();
+    // req.session.destroy();
     res.send(results);
   });
 });

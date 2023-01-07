@@ -54,7 +54,7 @@
           <hr />
           <div id="C_T">
             <br />
-            <p><%=list[i].content%></p>
+            <p style="word-wrap: break-word; white-space: pre-wrap;"><%=list[i].content%></p>
           </div>
           <% } %>
             <div style="margin:10px;">
@@ -67,6 +67,14 @@
               class="btn btn-primary backBtn"
               onclick="location.href='/border/borderPut/<%=list[0].no%>'">
               게시글 수정
+            </button>
+            <button
+              type="button"
+              id="dBtn"
+              name="deleteBtn"
+              class="btn btn-primary backBtn"
+              "> 
+              게시글 삭제
             </button>
                 <%}%>
               <%}%>

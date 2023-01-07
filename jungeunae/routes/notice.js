@@ -19,7 +19,7 @@ router.get("/", (req, res) => {
     if (err) {
       console.log(err);
     }
-    console.log(`Result => ${JSON.stringify(result)}`);
+    //console.log(`Result => ${JSON.stringify(result)}`);
     res.render("notice", {
       islogin: req.session.islogin,
       userid: req.session.userid,
@@ -34,7 +34,7 @@ router.get("/writePage", (req, res) => {
     if (err) {
       console.log(err);
     }
-    console.log(`Result => ${JSON.stringify(result)}`);
+    //console.log(`Result => ${JSON.stringify(result)}`);
     res.render("noticeOne", {
       islogin: req.session.islogin,
       userid: req.session.userid,
@@ -55,8 +55,7 @@ router.post("/writePage", (req, res) => {
 
 // ! 글 클릭하면 단건조회 페이지 이동
 router.get("/noticeLook/:no", (req, res) => {
-  var sql =
-    "select no, userid, title, content, DATE_FORMAT(ydata,'%Y-%m-%d') ydata from noticeboder where no = ?";
+  var sql = "select no, userid, title, content, DATE_FORMAT(ydata,'%Y-%m-%d') ydata from noticeboder where no = ?";
   const no = req.params.no;
   pool.query(sql, no, (err, result) => {
     if (err) {

@@ -2,99 +2,105 @@
 
 <!DOCTYPE html>
 <html lang="ko">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>miniproject login</title>
-        <link href="../stylesheets/borderOne.css" rel="stylesheet" />
-    </head>
-    <body>
-        <div class="container">
-            <div class="row">
-                <div class="two alt-two">
-                    <div class="row">
-                        <h1>
-                            Notice
-                            <span>To write a text</span>
-                        </h1>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="widget-area no-padding blank">
-                    <div class="status-upload">
-                        <% if(islogin){ %>
-                        <input class="aa" id="userid" value="<%=userid%>" />
-                        <% } %>
-                        <br />
-                        <input class="aa" id="title" placeholder="제목" />
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="widget-area no-padding blank">
-                        <div class="status-upload">
-                            <form>
-                                <textarea placeholder="여러가지 주제로 대화를 나눠요!" id="content"></textarea>
-                                <ul>
-                                    <li>
-                                        <a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Audio"><i class="fa fa-music"></i></a>
-                                    </li>
-                                    <li>
-                                        <a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Video"
-                                            ><i class="fa fa-video-camera"></i
-                                        ></a>
-                                    </li>
-                                    <li>
-                                        <a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Sound Record"
-                                            ><i class="fa fa-microphone"></i
-                                        ></a>
-                                    </li>
-                                    <li>
-                                        <a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Picture"
-                                            ><i class="fa fa-picture-o"></i
-                                        ></a>
-                                    </li>
-                                </ul>
-                                <button type="button" id="homeBtn" class="btn btn-success green">
-                                    <i class="fa fa-share"> <a href="#" class="aTag" onclick="history.back()">홈으로</a></i>
-                                </button>
-                                <button id="saveBtn" class="btn btn-success green" type="button">
-                                    <i class="fa fa-share">저장</i>
-                                </button>
-                            </form>
-                        </div>
-                        <!-- Status Upload  -->
-                    </div>
-                    <!-- Widget Area -->
-                </div>
-            </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>miniproject login</title>
+    <link href="../stylesheets/borderOne.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="two alt-two">
+          <div class="row">
+            <h1>
+              Notice
+              <span>To write a text</span>
+            </h1>
+          </div>
         </div>
-    </body>
-    <script>
-        insert();
-        function insert() {
-            saveBtn.addEventListener("click", () => {
-                let data = {
-                    userid: userid.value,
-                    title: title.value,
-                    content: content.value,
-                };
-                fetch("/notice/writePage", {
-                    method: "post",
-                    headers: {
-                        "content-type": "application/json",
-                    },
-                    body: JSON.stringify(data),
-                })
-                    .then((res) => res.json())
-                    .then(() => {
-                        alert("게시글 등록 완료");
-                        location.href = "/notice";
-                    });
-            });
-        }
-    </script>
+      </div>
+      <div class="row">
+        <div class="widget-area no-padding blank">
+          <div class="status-upload">
+            <% if(islogin){ %>
+            <input class="aa" id="userid" value="<%=userid%>" />
+            <% } %>
+            <br />
+            <input class="aa" id="title" placeholder="제목" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="widget-area no-padding blank">
+            <div class="status-upload">
+              <form>
+                <textarea id="content" name="content" placeholder="500자 이내로 작성해주세요" onkeyup="counter(this,500)"></textarea>
+                <ul>
+                  <li>
+                    <a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Audio"><i class="fa fa-music"></i></a>
+                  </li>
+                  <li>
+                    <a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Video"><i class="fa fa-video-camera"></i></a>
+                  </li>
+                  <li>
+                    <a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Sound Record"><i class="fa fa-microphone"></i></a>
+                  </li>
+                  <li>
+                    <a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Picture"><i class="fa fa-picture-o"></i></a>
+                  </li>
+                </ul>
+                <button type="button" id="homeBtn" class="btn btn-success green">
+                  <i class="fa fa-share"> <a href="#" class="aTag" onclick="history.back()">홈으로</a></i>
+                </button>
+                <button id="saveBtn" class="btn btn-success green" type="button">
+                  <i class="fa fa-share">저장</i>
+                </button>
+              </form>
+            </div>
+            <!-- Status Upload  -->
+          </div>
+          <!-- Widget Area -->
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    insert();
+
+    function counter(text, length) {
+      let limit = length;
+      let str = text.value.length;
+      if (str > limit) {
+        alert("최대 500자까지 입력이 가능합니다!");
+        text.value = text.value.substring(0, limit);
+        text.focus();
+      }
+      document.querySelector("#keyup").innerHTML = `${text.value.length}/${limit}`;
+    }
+
+    function insert() {
+      saveBtn.addEventListener("click", () => {
+        let data = {
+          userid: userid.value,
+          title: title.value,
+          content: content.value,
+        };
+        fetch("/notice/writePage", {
+          method: "post",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((res) => res.json())
+          .then(() => {
+            alert("게시글 등록 완료");
+            location.href = "/notice";
+          });
+      });
+    }
+  </script>
 </html>
