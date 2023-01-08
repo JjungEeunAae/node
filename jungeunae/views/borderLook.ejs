@@ -24,7 +24,7 @@
       .container {
         width: 90%;
         margin: 0 auto;
-        height: 1000px;
+        height: 100%;
         background-color: rgba(240, 241, 247, 0.911);
       }
       .aTag{
@@ -70,10 +70,9 @@
             </button>
             <button
               type="button"
-              id="dBtn"
+              id="deleteBtn"
               name="deleteBtn"
-              class="btn btn-primary backBtn"
-              "> 
+              class="btn btn-primary backBtn">
               게시글 삭제
             </button>
                 <%}%>
@@ -86,18 +85,18 @@
                 <% if(islogin){ %>
                 <input class="form-control" id="bc_id" name="ID" type="text" value="<%=userid%>" readonly>
                 <% } %>
-                <textarea class="form-control" id="bc_content" rows="3"></textarea>
+                <textarea class="form-control" id="bc_content" name="content" rows="3"></textarea>
               </div>
               <div>
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th>#</th>
-                      <th>번호</th>
+                      <th>댓글번호</th>
                       <th>ID</th>
-                      <th>댓글내용</th>
+                      <th>내용</th>
                       <th>작성시간</th>
-                      <th></th>
+                      <th> </th>
+                      <th> </th>
                     </tr>
                   </thead>
                   <tbody id="divcomment">
@@ -116,7 +115,6 @@
                   뒤로가기
                 </a>
               </button>
-              </button>
             </form>
           </div>
       </div>
@@ -124,11 +122,22 @@
     <script>
       const bo_id = `<%=bo_id%>`;
       const url = `/border/comment`;
-      const userid = "<%=userid%>"
-      commentAll();
-      commentInsert();
-      commentDelete();
-      viewsUpdate();
+      const userid = `<%=userid%>`;
+      commentAll(); //댓글 전체조회
+      commentUpdate(); //댓글 수정
+      commentInsert(); //댓글 등록
+      commentDelete(); //댓글 삭제
+      viewsUpdate(); //조회수 증가
+
+      //게시글 삭제
+      deleteBtn.addEventListener("click",()=>{
+        const no = "<%=list[0].no%>"
+        fetch(`/border/borderLook/${no}`,{method : "delete"})
+          .then((res)=>{
+            alert("삭제가 완료되었습니다")
+          })
+          .then(()=> location.href='/border');
+      })
 
       //조회수 증가
       function viewsUpdate(){
@@ -146,19 +155,19 @@
           //게스트일땐 댓글 삭제 버튼이 안보임
           for(let i = 0 ; i < res.length ; i++){
             let del = '';
-             if(userid == res[i].bc_id) {
-                  del = `<button type="button" id="delbtn">삭제</button>`
-             }
+            let update = '';
+            if(userid == res[i].bc_id) {
+              update = `<button type="button" id="updatebtn">수정</button>`
+              del = `<button type="button" id="delbtn">삭제</button>`
+            }
             const str = `
               <tr data-no="${res[i].no}">
-                <td><input type="checkbox" /></td>
                 <td>${res[i].no}</td>
                 <td>${res[i].bc_id}</td>
                 <td>${res[i].bc_content}</td>
                 <td>${res[i].bc_date}</td>
-                <td>
-                  ${del}
-                </td>
+                <td>${update}</td>
+                <td>${del}</td>
               </tr>`;
             divcomment.innerHTML += str;
           }
@@ -205,6 +214,43 @@
           };
         });
       }
+
+      // 댓글 수정 버튼을 누르면 텍스트창으로 넘어가는 곳
+      function commentUpdate(){
+        divcomment.addEventListener("click",(event)=>{
+          //텍스트 창으로 넘어가는 조건문
+          if(event.target.id == "updatebtn"){
+            let no = event.target.closest("tr").getAttribute("data-no");
+            fetch(`${url}/${bo_id}`)
+              .then((res) => res.json())
+              .then((res) => {
+                for( let i = 0 ; i < res.length ; i++){
+                bc_content.value = res[i].bc_content;
+                //console.log(res[]);
+                }
+              })
+          }
+          // else if(confirm('댓글을 수정하시겠습니까?')){
+          //   let no = event.target.closest("tr").getAttribute("data-no");
+          //   fetch(`${url}/${no}`,{
+          //     method: "PUT",
+          //     headers: {
+          //       "content-type" : "aqqlication/json"
+          //     },
+          //       body : JSON.stringify(data),
+          //   })
+          //     .then((res) => res.json())
+          //     .then((res) => {
+          //       if(res.result == true){
+          //         alert("수정완료");
+          //         commentAll();
+          //       } else {
+          //         alert("수정실패");
+          //       }
+          //         })
+          //     }
+        });
+      };
 
       function inputDel(){
         bc_content.value='';

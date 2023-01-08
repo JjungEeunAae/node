@@ -13,11 +13,12 @@ sql = {
   view: "UPDATE freeboard SET views = views + 1 WHERE no = ?", //조회수증가
   update: "update freeboard set ? where no = ?", //수정
   delete: "delete from freeboard where no = ?", //삭제
-  comment: `
-      SELECT * 
-      FROM boarder_comment`,
-  commentInsert: "INSERT into boarder_comment set ?",
-  commentDelete: "delete from boarder_comment where no = ?",
+
+  comment: `SELECT * FROM boarder_comment`, //댓글 전체조회
+  commentOne: "select * from boarder_comment where no = ?", //댓글 단건조회
+  commentInsert: "INSERT into boarder_comment set ?", //댓글 등록
+  commentDelete: "delete from boarder_comment where no = ?", //댓글 삭제
+  commentUpdate: "update boarder_comment set ? where no = ?", //댓글 수정
 };
 
 //!전체조회
@@ -90,8 +91,7 @@ router.put("/borderPut/:no", (req, res) => {
 
 // ! 글 클릭하면 단건조회 페이지 이동
 router.get("/borderLook/:no", (req, res) => {
-  var one =
-    "select no, userid, title, content, DATE_FORMAT(ydata,'%Y-%m-%d') ydata from freeboard where no = ?";
+  var one = "select no, userid, title, content, DATE_FORMAT(ydata,'%Y-%m-%d') ydata from freeboard where no = ?";
   const no = req.params.no;
   pool.query(one, no, (err, result) => {
     if (err) {
@@ -103,6 +103,18 @@ router.get("/borderLook/:no", (req, res) => {
       list: result,
       bo_id: no,
     });
+  });
+});
+
+// ! 게시글 삭제
+router.delete("/borderLook/:no", (req, res) => {
+  const no = req.params.no;
+  pool.query(sql.delete, no, (err, result) => {
+    console.log(result);
+    if (err) {
+      console.log("에러" + err);
+    }
+    res.send(result);
   });
 });
 
@@ -129,6 +141,19 @@ router.get("/comment/:bo_id", (req, res) => {
   });
 });
 
+// ! 댓글 단건조회
+router.get("/comment/:bo_id", (req, res) => {
+  const bo_id = req.params.bo_id;
+  var sql = "select * from boarder_comment where bo_id = ?";
+  pool.query(sql, bo_id, (err, result, fields) => {
+    if (err) {
+      console.log(err);
+    }
+    res.json(result[0]);
+    //console.log(result);
+  });
+});
+
 // ! 댓글 등록
 router.post("/comment", (req, res) => {
   // const bo_id = req.params.bo_id;
@@ -139,6 +164,24 @@ router.post("/comment", (req, res) => {
     res.json(result);
   });
 });
+
+// ! 댓글 수정
+// router.put("/comment/:no", (req, res) => {
+//   let data = [req.body, req.params.no];
+//   pool.query(sql.commentUpdate, data, (err, result) => {
+//     let resultData = {};
+//     if (err) {
+//       console.log(err);
+//       throw err;
+//     } else if (result.changedRows > 0) {
+//       resultData.result = true;
+//       resultData.data = req.body;
+//     } else {
+//       resultData.result = false;
+//     }
+//     res.json(resultData);
+//   });
+// });
 
 // ! 댓글 삭제
 router.delete("/comment/:no", (req, res) => {
